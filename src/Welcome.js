@@ -11,7 +11,6 @@ import Typography from '@mui/material/Typography';
 export function Welcome({ name, poster, rating, year, summary }) {
   const styles = { color: rating >= "8.5" ? "green" : "red" };
   const [showText, setShowText] = useState(false);
-  const summarystyles = { display: showText ? "block" : "none" };
   const [value, setValue] = useState(2);
   return (
     <Card className="new-movie">
