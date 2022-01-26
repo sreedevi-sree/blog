@@ -2,13 +2,16 @@ import { useState } from "react";
 import IconButton from '@mui/material/IconButton';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import InfoIcon from '@mui/icons-material/Info';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import { Counter } from "./Counter";
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export function Welcome({ name, poster, rating, year, summary }) {
+export function Welcome({ name, poster, rating, year, summary,id ,deleteButton }) {
+  const history=useHistory();
   const styles = { color: rating >= "8.5" ? "green" : "red" };
   const [showText, setShowText] = useState(false);
   const [value, setValue] = useState(2);
@@ -23,6 +26,13 @@ export function Welcome({ name, poster, rating, year, summary }) {
             aria-label="Toggle summary">
 
             {showText ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </IconButton>
+          <IconButton
+            onClick={() => history.push("/movies/" + id)}
+            color="primary"
+            aria-label="Movie details">
+
+           <InfoIcon />
           </IconButton>
         </h1>
         {showText ? <p className="movie-summary">{summary}</p> : ""}
@@ -42,7 +52,10 @@ export function Welcome({ name, poster, rating, year, summary }) {
         {/* conditional rendering */}
 
       </CardContent>
-      <Counter />
+      <Counter />   {deleteButton}
+      <button 
+       onClick={() => history.push("/movies/edit/" + id)}
+      >Edit Movie</button>
     </Card>
   );
 }

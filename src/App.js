@@ -1,13 +1,15 @@
 import {useState} from "react";
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-
+import { Switch, Redirect, Route, Link } from "react-router-dom";
+import { MovieDetails } from "./MovieDetails";
+import { NotFound } from "./NotFound";
+import { Home } from "./Home";
+import { AddMovie } from "./AddMovie";
+import { MovieList } from "./MovieList";
+import { EditMovie } from "./EditMovie";
 
 import "./index.css";
-import { Welcome } from "./Welcome";
-// import { style } from "@mui/system";
-export default function App() {
 
+export default function App() {
   const Initialmovie = [
     {
       name: "Thuppaki",
@@ -16,8 +18,9 @@ export default function App() {
       rating: "9",
       year: "2012",
       summary:
-"An army captain visits Mumbai to be with his family and find a suitable bride. However, an explosion in the city sets him off on a mission to find and disable a terrorist sleeper cell in the city."
-    },
+"An army captain visits Mumbai to be with his family and find a suitable bride. However, an explosion in the city sets him off on a mission to find and disable a terrorist sleeper cell in the city.",
+trailer:"https://www.youtube.com/embed/LLUeCstylF0"   
+},
     {
       name: "Spiderman",
       poster:
@@ -25,7 +28,8 @@ export default function App() {
       rating: "7.13",
       year: "2002",
       summary:
-"Peter Parker's life changes when he is bitten by a genetically altered spider and gains superpowers. He uses his powers to help people and finds himself facing the Green Goblin, an evil maniac"
+"Peter Parker's life changes when he is bitten by a genetically altered spider and gains superpowers. He uses his powers to help people and finds himself facing the Green Goblin, an evil maniac",
+trailer:"https://www.youtube.com/embed/JfVOs4VSpmA"
     },
     {
       name: "Red notice",
@@ -34,7 +38,9 @@ export default function App() {
       rating: " 6.4",
       year: "2021",
       summary:
-"In the world of international crime, an Interpol agent attempts to hunt down and capture the world's most wanted art thief."
+"In the world of international crime, an Interpol agent attempts to hunt down and capture the world's most wanted art thief.",
+trailer:
+"https://www.youtube.com/embed/AHRQ3cpslIY"
     },
     {
       name: "Hera pheri",
@@ -43,7 +49,8 @@ export default function App() {
       rating: "8.2",
       year: "2000",
       summary:
-"Two tenants and a landlord, in desperate need of money, chance upon a ransom call via a cross connection. They hatch a plan to claim the ransom for themselves"
+"Two tenants and a landlord, in desperate need of money, chance upon a ransom call via a cross connection. They hatch a plan to claim the ransom for themselves",
+trailer:"https://www.youtube.com/embed/Nj4H-X3FAWU"
     },
     {
       name: "M S Dhoni",
@@ -52,74 +59,59 @@ export default function App() {
       rating: "8",
       year: "2016",
       summary:
-"M S Dhoni, a boy from Ranchi, aspires to play cricket for India. Though he initially tries to please his father by working for the Indian Railways, he ultimately decides to chase his dreams"
+"M S Dhoni, a boy from Ranchi, aspires to play cricket for India. Though he initially tries to please his father by working for the Indian Railways, he ultimately decides to chase his dreams",
+trailer:"https://www.youtube.com/embed/6L6XqWoS8tw"
     }
   ];
-  const [name,setName]=useState(" ");
-  const [poster,setPoster]=useState(" ");
-  const [rating,setRating]=useState(" ");
-  const [year,setYear]=useState(" ");
-  const [summary,setSummary]=useState(" ");
+ 
 
 const [movieList,setMovieList]=useState(Initialmovie)
-  return (
+
+  return (    
     <div className="App">
-      <div className="MovieArray">
-        <h3>Enter Movie details</h3>
-        <TextField
-         value={name}
-         onChange={(event)=>
-           setName(event.target.value)}        
-        id="outlined-basic" label="Name" variant="outlined" />
-        <TextField       
-        value={poster}
-       onChange={(event)=>
-         setPoster(event.target.value)}
-        id="outlined-basic" label="Poster" variant="outlined" />
-        <TextField 
-        value={rating}
-      onChange={(event)=>
-        setRating(event.target.value)}
-        id="outlined-basic" label="Rating" variant="outlined" />
-        
-        <TextField
-        value={year}
-      onChange={(event)=>
-        setYear(event.target.value)}
-         id="outlined-basic" label="Year" variant="outlined" />
-        <TextField
-        value={summary}
-      onChange={(event)=>
-        setSummary(event.target.value)}
-         id="outlined-basic" label="Summary" variant="outlined" />
+      <ul>
+      <li>
+        <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/movies">Movie List</Link>
+          </li> 
+          <li>
+          <Link to="/addMovie">Add Movie</Link>
+          </li>    
+           
+        </ul>
+
+      <Switch>
+      <Route path="/films">
+          <Redirect to="/movies" />
+        </Route>
+
+        <Route path="/movies/:id">
+        <MovieDetails movieList={movieList}/>        
+        </Route>     
       
-</div>
-<Button 
-onClick={()=>{
-  const newMovie ={
-    name:name,
-    poster:poster,
-    rating:rating,
-    year:year,
-    summary:summary,
+        <Route path="/movies/edit/:id">
+          <h1>HAI</h1>
+        <EditMovie movieList={movieList} setMovieList={setMovieList} />
+        </Route>
 
-  };
-  setMovieList([...movieList,newMovie])
-}}
-variant="outlined">Add Movie</Button>
+        <Route path="/addMovie">
+        <AddMovie movieList={movieList} setMovieList={setMovieList}  />
+        </Route>
 
-      <section className="movie-list">
-      {movieList.map((movie) => (
-        <Welcome
-          name={movie.name}
-          poster={movie.poster}
-          rating={movie.rating}
-          year={movie.year}
-          summary={movie.summary}
-        />
-      ))}
-      </section>
-    </div>
-  );
-}
+        <Route path="/movies">
+        <MovieList movieList={movieList} setMovieList={setMovieList} />
+        </Route>
+          
+        <Route exact path="/">
+          <Home />  
+        </Route> 
 
+        <Route path="**">
+          <NotFound />
+        </Route>
+      </Switch>    
+      </div>
+    );
+  }

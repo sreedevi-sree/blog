@@ -1,7 +1,10 @@
 .App {
   font-family: sans-serif;
   text-align: center;
-  /* background-color: rgb(192, 210, 216); */
+  
+}
+.App ul{
+  list-style: none;
 }
 .movie-poster {
   height: 300px;
@@ -13,7 +16,7 @@
   
 }
 .movie-summary {
-  
+
   width: 300px;
 }
 .movie-list{
