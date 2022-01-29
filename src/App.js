@@ -1,167 +1,117 @@
-import { useState } from "react";
-import { ProgressBar } from 'react-bootstrap';
+import {useState} from "react";
+import { Switch, Redirect, Route, Link } from "react-router-dom";
+import { MovieDetails } from "./MovieDetails";
+import { NotFound } from "./NotFound";
+import { Home } from "./Home";
+import { AddMovie } from "./AddMovie";
+import { MovieList } from "./MovieList";
+import { EditMovie } from "./EditMovie";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "./index.css";
 
 export default function App() {
-  const marks = [
+  const Initialmovie = [
     {
-      id: 10,
-      maths: 30,
-      physics: 30,
-      chemistry: 30,
-      biology: 30,
-      english: 30
+      name: "Thuppaki",
+      poster:
+        "https://m.media-amazon.com/images/M/MV5BZTc4YWY5MzAtOTc4Zi00NDVmLThlMGItYjliOGNkYmM3NDBmXkEyXkFqcGdeQXVyOTk3NTc2MzE@._V1_.jpg",
+      rating: "9",
+      year: "2012",
+      summary:
+"An army captain visits Mumbai to be with his family and find a suitable bride. However, an explosion in the city sets him off on a mission to find and disable a terrorist sleeper cell in the city.",
+trailer:"https://www.youtube.com/embed/LLUeCstylF0"   
+},
+    {
+      name: "Spiderman",
+      poster:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQlKOtc-RTtE2ns8fMI990-RHrqGwncy_D0w&usqp=CAU",
+      rating: "7.13",
+      year: "2002",
+      summary:
+"Peter Parker's life changes when he is bitten by a genetically altered spider and gains superpowers. He uses his powers to help people and finds himself facing the Green Goblin, an evil maniac",
+trailer:"https://www.youtube.com/embed/JfVOs4VSpmA"
     },
     {
-      id: 11,
-      maths: 60,
-      physics: 60,
-      chemistry: 60,
-      biology: 60,
-      english: 60
+      name: "Red notice",
+      poster:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSlwYfCCXZcMjUGSM88PBwYhTvWEc_kjUu_Gw&usqp=CAU",
+      rating: " 6.4",
+      year: "2021",
+      summary:
+"In the world of international crime, an Interpol agent attempts to hunt down and capture the world's most wanted art thief.",
+trailer:
+"https://www.youtube.com/embed/AHRQ3cpslIY"
     },
     {
-      id: 12,
-      maths: 90,
-      physics: 90,
-      chemistry: 90,
-      biology: 90,
-      english: 90
+      name: "Hera pheri",
+      poster:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAeH5wJvCZbY6_lOec9vAmUNAQkBauGNViwA&usqp=CAU",
+      rating: "8.2",
+      year: "2000",
+      summary:
+"Two tenants and a landlord, in desperate need of money, chance upon a ransom call via a cross connection. They hatch a plan to claim the ransom for themselves",
+trailer:"https://www.youtube.com/embed/Nj4H-X3FAWU"
     },
     {
-      id: 13,
-      maths: 70,
-      physics: 70,
-      chemistry:70,
-      biology: 70,
-      english: 70
-    },
-    {
-      id: 14,
-      maths: 45,
-      physics: 45,
-      chemistry: 45,
-      biology: 45,
-      english: 45
+      name: "M S Dhoni",
+      poster:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ334LoTpdtqtYk17XPQjRcBim8qRyKiR1d6Q&usqp=CAU",
+      rating: "8",
+      year: "2016",
+      summary:
+"M S Dhoni, a boy from Ranchi, aspires to play cricket for India. Though he initially tries to please his father by working for the Indian Railways, he ultimately decides to chase his dreams",
+trailer:"https://www.youtube.com/embed/6L6XqWoS8tw"
     }
   ];
-  const defmark = [
-    {
-      maths: "Maths %",
-      physics: "Physics %",
-      chemistry: "Chemistry %",
-      biology: "Biology %",
-      english: "English %"
-    }
-  ];
-  // create state for each data you need
-  /* first to store filtered data, i create one state called
-     called filteredMarks 
-     Initially there will be all data - so all marks stored
-  */
+ 
 
-  const [filteredMarks, setFilteredMarks] = useState(defmark);
-  // create another state to store search value
-  const [searchInput, setSearchInput] = useState("");
+const [movieList,setMovieList]=useState(Initialmovie)
 
-  // function to filter marks based on id value
-  const filterMarks = () => {
-    // store filtered result in a variable
-    let marksCopy = marks.filter((mark) => mark.id === parseInt(searchInput));
-    // change the filteredMarks state with the new data
-    setFilteredMarks(marksCopy);
-  };
-
-  return (
+  return (    
     <div className="App">
-      <div className="studentId">
-<h4>
-Calculate the percentage level of the person's mark
-</h4>   
-<br/>
-     <input
-          type="text"
-          class="form-control"
-          id="usr"
-          placeholder="Student Id"
-          value={searchInput}
-          onChange={(e) => setSearchInput(e.target.value)}
-        />
-              <br />
+      <ul>
+      <li>
+        <Link to="/">Home</Link>
+        </li>
+        <li>
+          <Link to="/movies">Movie List</Link>
+          </li> 
+          <li>
+          <Link to="/addMovie">Add Movie</Link>
+          </li>    
+           
+        </ul>
 
-        {/* on click of button called filter function */}
-        <button onClick={filterMarks}>Get Data From Server</button>
-        <br/>
-      </div>
-      {filteredMarks.map((mark) => (
-        <Welcome
-          id={mark.id}
-          maths={mark.maths}
-          physics={mark.physics}
-          chemistry={mark.chemistry}
-          biology={mark.biology}
-          english={mark.english}
-        />
-      ))}
-     
-    </div>
-  );
-}
+      <Switch>
+      <Route path="/films">
+          <Redirect to="/movies" />
+        </Route>
 
-function Welcome({ id, physics, maths, chemistry, english, biology, per }) {
-  per = ((maths + physics + chemistry + biology + english) / 500) * 100;
-
-  return (
-    <div className="mark">
-      <h6>Subject Percentage of id {id}</h6>
-      <br />
-
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Maths %"
-        value={maths}
-      />
-      <br />
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Physics %"
-        value={physics}
-      />
-            <br />
-
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Chemistry %"
-        value={chemistry}
-      />
-            <br />
-
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Biology %"
-        value={biology}
-      />
-            <br />
-
-      <input
-        type="text"
-        class="form-control"
-        placeholder="English %"
-        value={english}
-      />
-      <br />
-      <h4>Total Percentage</h4>
+        <Route path="/movies/:id">
+        <MovieDetails movieList={movieList}/>        
+        </Route>     
       
-{per<=90 && per>70? (<ProgressBar now={per} variant="info" label={`${per}%  (success)`} />):("")}
-{per<=70 && per>50  ? (<ProgressBar now={per} variant="success" label={`${per}%  (Average)`} />):("")}
-{per<=50 && per>30 ? (<ProgressBar now={per} variant="warning" label={`${per}%  (Pass)`} />):("")}
-{per<=30 ? (<ProgressBar now={per} variant="danger" label={`${per}%  (Fail)`} />):("")}      
-    </div>
-  );
-}
+        <Route path="/movies/edit/:id">
+          <h1>HAI</h1>
+        <EditMovie movieList={movieList} setMovieList={setMovieList} />
+        </Route>
+
+        <Route path="/addMovie">
+        <AddMovie movieList={movieList} setMovieList={setMovieList}  />
+        </Route>
+
+        <Route path="/movies">
+        <MovieList movieList={movieList} setMovieList={setMovieList} />
+        </Route>
+          
+        <Route exact path="/">
+          <Home />  
+        </Route> 
+
+        <Route path="**">
+          <NotFound />
+        </Route>
+      </Switch>    
+      </div>
+    );
+  }

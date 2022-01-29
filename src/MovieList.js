@@ -1,4 +1,6 @@
 import { Welcome } from "./Welcome";
+import Button from '@mui/material/Button';
+
 
 export function MovieList({ movieList,setMovieList }) {
   return (
@@ -13,7 +15,10 @@ export function MovieList({ movieList,setMovieList }) {
         summary={movie.summary}
         id={index} 
         deleteButton={
-        <button onClick={()=>{
+        <Button 
+        variant="contained"
+
+        onClick={()=>{
             const remainingMovies=movieList.filter((mv,idx)=>{
                 const removeIdx=index;
                 return idx!==removeIdx;                
@@ -21,7 +26,7 @@ export function MovieList({ movieList,setMovieList }) {
             )
             setMovieList(remainingMovies)
         }}
-        >Delete me!!!</button>}
+        >Delete me!!!</Button>}
         />        
     ))}
     

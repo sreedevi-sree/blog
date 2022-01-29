@@ -9,6 +9,8 @@ import { Counter } from "./Counter";
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import Button from '@mui/material/Button';
+
 
 export function Welcome({ name, poster, rating, year, summary,id ,deleteButton }) {
   const history=useHistory();
@@ -53,9 +55,12 @@ export function Welcome({ name, poster, rating, year, summary,id ,deleteButton }
 
       </CardContent>
       <Counter />   {deleteButton}
-      <button 
+      {/* <Button >Contained</Button> */}
+
+      <Button 
+      variant="contained"
        onClick={() => history.push("/movies/edit/" + id)}
-      >Edit Movie</button>
+      >Edit Movie</Button>
     </Card>
   );
 }
