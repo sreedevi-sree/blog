@@ -1,4 +1,3 @@
-// You need useState to maintain state (data) inside the app
 import { useState } from "react";
 import { ProgressBar } from 'react-bootstrap';
 
@@ -10,42 +9,42 @@ export default function App() {
     {
       id: 10,
       maths: 30,
-      physics: 50,
-      chemistry: 60,
-      biology: 60,
-      english: 70
+      physics: 30,
+      chemistry: 30,
+      biology: 30,
+      english: 30
     },
     {
       id: 11,
-      maths: 30,
-      physics: 50,
+      maths: 60,
+      physics: 60,
       chemistry: 60,
       biology: 60,
-      english: 70
+      english: 60
     },
     {
       id: 12,
-      maths: 30,
-      physics: 50,
-      chemistry: 60,
-      biology: 60,
-      english: 70
+      maths: 90,
+      physics: 90,
+      chemistry: 90,
+      biology: 90,
+      english: 90
     },
     {
       id: 13,
-      maths: 30,
-      physics: 50,
-      chemistry: 60,
-      biology: 60,
+      maths: 70,
+      physics: 70,
+      chemistry:70,
+      biology: 70,
       english: 70
     },
     {
       id: 14,
-      maths: 30,
-      physics: 50,
-      chemistry: 60,
-      biology: 60,
-      english: 70
+      maths: 45,
+      physics: 45,
+      chemistry: 45,
+      biology: 45,
+      english: 45
     }
   ];
   const defmark = [
@@ -94,6 +93,7 @@ Calculate the percentage level of the person's mark
 
         {/* on click of button called filter function */}
         <button onClick={filterMarks}>Get Data From Server</button>
+        <br/>
       </div>
       {filteredMarks.map((mark) => (
         <Welcome
@@ -158,16 +158,10 @@ function Welcome({ id, physics, maths, chemistry, english, biology, per }) {
       <br />
       <h4>Total Percentage</h4>
       
-{per>=90 ? (<ProgressBar now={per} variant="info" label={`${per}% completed (success)`} />):("")}
-{per>=70 ? (<ProgressBar now={per} variant="success" label={`${per}% completed (success)`} />):("")}
-{per>=50 ? (<ProgressBar now={per} variant="warning" label={`${per}% completed (success)`} />):("")}
-{per<=30 ? (<ProgressBar now={per} variant="danger" label={`${per}% completed (success)`} />):("")}
-
-      
-
-
-
-      
+{per<=90 && per>70? (<ProgressBar now={per} variant="info" label={`${per}%  (success)`} />):("")}
+{per<=70 && per>50  ? (<ProgressBar now={per} variant="success" label={`${per}%  (Average)`} />):("")}
+{per<=50 && per>30 ? (<ProgressBar now={per} variant="warning" label={`${per}%  (Pass)`} />):("")}
+{per<=30 ? (<ProgressBar now={per} variant="danger" label={`${per}%  (Fail)`} />):("")}      
     </div>
   );
 }
