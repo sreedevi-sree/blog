@@ -1,8 +1,13 @@
 import { Welcome } from "./Welcome";
-import Button from '@mui/material/Button';
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
+import { useHistory } from "react-router-dom";
+
 
 
 export function MovieList({ movieList,setMovieList }) {
+  const history=useHistory();
   return (
     <section className="movie-list">
     {movieList.map((movie, index) => (
@@ -15,10 +20,9 @@ export function MovieList({ movieList,setMovieList }) {
         summary={movie.summary}
         id={index} 
         deleteButton={
-        <Button 
-        variant="contained"
-
-        onClick={()=>{
+          <IconButton 
+          style={{marginLeft:"auto"}}
+          onClick={()=>{
             const remainingMovies=movieList.filter((mv,idx)=>{
                 const removeIdx=index;
                 return idx!==removeIdx;                
@@ -26,8 +30,21 @@ export function MovieList({ movieList,setMovieList }) {
             )
             setMovieList(remainingMovies)
         }}
-        >Delete me!!!</Button>}
-        />        
+          aria-label="delete"
+          color="error">
+  <DeleteIcon />
+</IconButton>
+        }
+        editButton={
+          <IconButton
+          onClick={()=> history.push("/movies/edit/"+ index)}                  
+          aria-label="delete"
+          color="secondary">
+  <EditIcon />
+</IconButton>
+        }
+        />  
+              
     ))}
     
   </section>

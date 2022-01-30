@@ -8,6 +8,8 @@ export function AddMovie({movieList, setMovieList}) {
   const [rating, setRating] = useState(" ");
   const [year, setYear] = useState(" ");
   const [summary, setSummary] = useState(" ");
+  const [trailer, setTrailer] = useState(" ");
+
   return (
     <div className="MovieArray">
     <TextField
@@ -34,6 +36,11 @@ export function AddMovie({movieList, setMovieList}) {
       value={summary}
       onChange={(event) => setSummary(event.target.value)}
       id="outlined-basic" label="Summary" variant="outlined" />
+
+      <TextField
+        value={trailer}
+        onChange={(event) => setTrailer(event.target.value)}
+        id="outlined-basic" label="trailer" variant="outlined" />
     <Button
       onClick={() => {
         const newMovie = {
@@ -42,6 +49,7 @@ export function AddMovie({movieList, setMovieList}) {
           rating: rating,
           year: year,
           summary: summary,
+          trailer:trailer
         };
         setMovieList([...movieList, newMovie]);
       }}

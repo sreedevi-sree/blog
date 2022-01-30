@@ -9,10 +9,9 @@ import { Counter } from "./Counter";
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import Button from '@mui/material/Button';
 
 
-export function Welcome({ name, poster, rating, year, summary,id ,deleteButton }) {
+export function Welcome({ name, poster, rating, year, summary,id ,deleteButton,editButton }) {
   const history=useHistory();
   const styles = { color: rating >= "8.5" ? "green" : "red" };
   const [showText, setShowText] = useState(false);
@@ -52,15 +51,16 @@ export function Welcome({ name, poster, rating, year, summary,id ,deleteButton }
         {/* <p style={summarystyles} className="movie-summary">{summary}</p>   */}
 
         {/* conditional rendering */}
-
+       
       </CardContent>
-      <Counter />   {deleteButton}
-      {/* <Button >Contained</Button> */}
-
-      <Button 
-      variant="contained"
-       onClick={() => history.push("/movies/edit/" + id)}
-      >Edit Movie</Button>
+      
+<div className="counter">
+<Counter /> 
+      {deleteButton}
+      {editButton} 
+</div>
+     
+      
     </Card>
   );
 }

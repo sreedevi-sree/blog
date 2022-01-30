@@ -5,6 +5,16 @@
 }
 .App ul{
   list-style: none;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: black;
+margin-top: 10px;
+}
+.movie-name{
+  background-color: red;
+  color:white;
+  border-radius: 20px;
 }
 .movie-poster {
   height: 300px;
@@ -36,13 +46,22 @@
 .counter{
   display:flex;
   flex-wrap: wrap;
-justify-content: space-between;
   font-size: 15px;
 margin: 10px;
+justify-content: space-between;
+
 }
 .MovieArray{
   margin-top: 10px;
   display: flex;
   flex-direction: row;;
 gap:20px;
+}
+.image img{
+  width: 20%;
+  margin: 10px;
+  height: 500px;
+  object-fit: cover;
+border-radius: 10px;
+
 }
