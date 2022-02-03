@@ -3,10 +3,11 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Button from '@mui/material/Button';
 
-export function MovieDetails({ movieList }) {
+export function MovieDetails({ movieList}) {
 
   const { id } = useParams();
   const movie = movieList[id];
+
 const history=useHistory();
 
   console.log(movie);

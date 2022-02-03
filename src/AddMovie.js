@@ -1,14 +1,25 @@
-import { useState } from "react";
+
+import { useState,useEffect } from "react";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
-export function AddMovie({movieList, setMovieList}) {
+export function AddMovie() {
   const [name, setName] = useState(" ");
   const [poster, setPoster] = useState(" ");
   const [rating, setRating] = useState(" ");
   const [year, setYear] = useState(" ");
   const [summary, setSummary] = useState(" ");
   const [trailer, setTrailer] = useState(" ");
+
+  const [movieList,setMovieList]=useState([])
+  const addMovies= ()=>{
+    fetch("https://618fa736f6bf4500174849a7.mockapi.io/movies/addmovie")
+
+    .then((data)=>data.json)
+    .then((ads)=>setMovieList([...movieList,ads]))
+   };
+
+   useEffect(addMovies,[movieList])
 
   return (
     <div className="MovieArray">
@@ -42,17 +53,9 @@ export function AddMovie({movieList, setMovieList}) {
         onChange={(event) => setTrailer(event.target.value)}
         id="outlined-basic" label="trailer" variant="outlined" />
     <Button
-      onClick={() => {
-        const newMovie = {
-          name: name,
-          poster: poster,
-          rating: rating,
-          year: year,
-          summary: summary,
-          trailer:trailer
-        };
-        setMovieList([...movieList, newMovie]);
-      }}
+      onClick={() => 
+        addMovies()
+      }
       variant="outlined">Add Movie</Button>
   </div>
   )

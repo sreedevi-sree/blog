@@ -3,10 +3,30 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { useHistory } from "react-router-dom";
+import { useEffect, useState} from "react";
 
+export function MovieList() {
+ 
+  const [movieList,setMovieList]=useState([])
 
+ const getMovies= ()=>{
+    fetch("https://618fa736f6bf4500174849a7.mockapi.io/movies", {
+      method:"GET"
+    })
+      .then((data)=>data.json())
+      .then ((mvs) =>setMovieList(mvs))
+   };
 
-export function MovieList({ movieList,setMovieList }) {
+   useEffect(getMovies,[])
+
+  const deleteMovie=(id) => {
+    fetch("https://618fa736f6bf4500174849a7.mockapi.io/movies/" +id, {
+      method:"DELETE"
+    })
+    .then((data)=>data.json())
+    .then (()=>getMovies());
+  }
+
   const history=useHistory();
   return (
     <section className="movie-list">
@@ -22,14 +42,7 @@ export function MovieList({ movieList,setMovieList }) {
         deleteButton={
           <IconButton 
           style={{marginLeft:"auto"}}
-          onClick={()=>{
-            const remainingMovies=movieList.filter((mv,idx)=>{
-                const removeIdx=index;
-                return idx!==removeIdx;                
-            }           
-            )
-            setMovieList(remainingMovies)
-        }}
+          onClick={()=> deleteMovie(movie.id)}           
           aria-label="delete"
           color="error">
   <DeleteIcon />
