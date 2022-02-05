@@ -2,11 +2,22 @@ import { useParams } from "react-router-dom";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Button from '@mui/material/Button';
+import { useEffect, useState} from "react";
 
-export function MovieDetails({ movieList}) {
+
+export function MovieDetails() {
 
   const { id } = useParams();
-  const movie = movieList[id];
+  const [movie,setMovie] = useState({});
+  const getMovie= ()=>{
+    fetch("https://618fa736f6bf4500174849a7.mockapi.io/movies/"+id , {
+      method:"GET"
+    })
+      .then((data)=>data.json())
+      .then ((mv) =>setMovie(mv))
+   };
+
+   useEffect(getMovie,[])
 
 const history=useHistory();
 

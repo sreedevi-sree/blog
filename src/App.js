@@ -15,6 +15,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
+import { BasicForm } from "./BasicForm";
 
 
 
@@ -22,10 +23,6 @@ export default function App() {
  
  
 const [movieList,setMovieList]=useState([])
-
-
-
-
 const [mode,setMode]=useState("dark");
 const history=useHistory();
 const themeCtx=createTheme({
@@ -64,15 +61,19 @@ elevation={4}>
 
         <Route path="/movies/edit/:id">
           <h1>Edit Movie</h1>
-        <EditMovie movieList={movieList} setMovieList={setMovieList} />
+        <EditMovie  />
         </Route>
 
         <Route path="/movies/addMovie">
-        <AddMovie movieList={movieList} setMovieList={setMovieList}  />
+        <AddMovie   />
         </Route>
 
+        {/* <Route path="/movies/basicForm">
+        <BasicForm   />
+        </Route> */}
+
         <Route path="/movies/:id">
-        <MovieDetails movieList={movieList}/>        
+        <MovieDetails />        
         </Route>     
       
         <Route path="/movies">
@@ -92,3 +93,4 @@ elevation={4}>
       </ThemeProvider>
     );
   }
+

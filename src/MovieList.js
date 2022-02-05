@@ -38,7 +38,7 @@ export function MovieList() {
         rating={movie.rating}
         year={movie.year}
         summary={movie.summary}
-        id={index} 
+        id={movie.id} 
         deleteButton={
           <IconButton 
           style={{marginLeft:"auto"}}
@@ -50,7 +50,7 @@ export function MovieList() {
         }
         editButton={
           <IconButton
-          onClick={()=> history.push("/movies/edit/"+ index)}                  
+          onClick={()=> history.push("/movies/edit/"+ movie.id)}                  
           aria-label="delete"
           color="secondary">
   <EditIcon />
