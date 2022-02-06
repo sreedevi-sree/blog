@@ -7,7 +7,7 @@ const formValidationSchema = yup.object({
     .min(5)
     .matches(
         /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-        "please enter correct mail format"
+        "please enter correct email format"
         ),
     
     password:yup
