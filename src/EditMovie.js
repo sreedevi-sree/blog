@@ -10,7 +10,7 @@ export function EditMovie() {
   const [movie,setMovie] = useState(null);
   
  const getMovie= ()=>{
-  fetch("https://618fa736f6bf4500174849a7.mockapi.io/movies" + id, {
+  fetch("https://618fa736f6bf4500174849a7.mockapi.io/movies/" + id, {
     method:"GET"
   })
     .then((data)=>data.json())

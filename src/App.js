@@ -68,9 +68,9 @@ elevation={4}>
         <AddMovie   />
         </Route>
 
-        {/* <Route path="/movies/basicForm">
+        <Route path="/movies/basicForm">
         <BasicForm   />
-        </Route> */}
+        </Route>
 
         <Route path="/movies/:id">
         <MovieDetails />        
