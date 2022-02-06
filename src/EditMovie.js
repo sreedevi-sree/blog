@@ -17,7 +17,7 @@ export function EditMovie() {
     .then ((mv) =>setMovie(mv))
  };
 
- useEffect(getMovie,[])
+ useEffect(getMovie)
 console.log(movie);
 
 return movie ? <EditMovieForm movie={movie} /> : "";

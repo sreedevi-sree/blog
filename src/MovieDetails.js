@@ -17,7 +17,7 @@ export function MovieDetails() {
       .then ((mv) =>setMovie(mv))
    };
 
-   useEffect(getMovie,[])
+   useEffect(getMovie)
 
 const history=useHistory();
 

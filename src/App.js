@@ -22,7 +22,7 @@ import { BasicForm } from "./BasicForm";
 export default function App() {
  
  
-const [movieList,setMovieList]=useState([])
+// const [movieList,setMovieList]=useState([])
 const [mode,setMode]=useState("dark");
 const history=useHistory();
 const themeCtx=createTheme({

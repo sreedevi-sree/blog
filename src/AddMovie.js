@@ -2,7 +2,7 @@
 
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { useState } from "react";
+// import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import Button from '@mui/material/Button';
@@ -18,8 +18,7 @@ const formValidationSchema = yup.object({
   .required(),
 
   rating:yup
-  .string()
-  // .matches(/^[0-9.]$/i,)
+  .number()
   .required(),
 
   year:yup
@@ -59,8 +58,11 @@ const history=useHistory();
     onBlur={handleBlur}
     type="name"
     placeholder="name"
-    id="outlined-basic" label="Name" variant="outlined" />
+    label="Name"
+     variant="outlined"
+      />
 {errors.name && touched.name ? errors.name : ""}
+
     <TextField
       id="poster"
       name="poster"
@@ -69,8 +71,9 @@ const history=useHistory();
       onBlur={handleBlur}
       type="poster"
       placeholder="poster"
-      id="outlined-basic" label="Poster" variant="outlined" />
+      label="Poster" variant="outlined" />
 {errors.poster && touched.poster ? errors.poster : ""}
+
     <TextField
       id="rating"
       name="rating"
@@ -79,8 +82,9 @@ const history=useHistory();
       onBlur={handleBlur}
       type="rating"
       placeholder="rating"
-      id="outlined-basic" label="Rating" variant="outlined" />
+      label="Rating" variant="outlined" />
 {errors.rating && touched.rating ? errors.rating : ""}
+
     <TextField
      id="year"
      name="year"
@@ -89,8 +93,9 @@ const history=useHistory();
      onBlur={handleBlur}
      type="year"
      placeholder="year"
-      id="outlined-basic" label="Year" variant="outlined" />
+     label="Year" variant="outlined" />
 {errors.year && touched.year ? errors.year : ""}
+
     <TextField
       id="summary"
       name="summary"
@@ -99,8 +104,9 @@ const history=useHistory();
       onBlur={handleBlur}
       type="summary"
       placeholder="summary"
-      id="outlined-basic" label="Summary" variant="outlined" />
+      label="Summary" variant="outlined" />
 {errors.summary && touched.summary ? errors.summary : ""}
+
       <TextField
         id="trailer"
         name="trailer"
@@ -109,7 +115,7 @@ const history=useHistory();
         onBlur={handleBlur}
         type="trailer"
         placeholder="trailer"
-        id="outlined-basic" label="trailer" variant="outlined" />
+       label="trailer" variant="outlined" />
         {errors.trailer && touched.trailer ? errors.trailer : ""}
     <Button
    
