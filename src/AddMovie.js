@@ -1,12 +1,16 @@
 
-
+// formik for form validation
 import { useFormik } from "formik";
+
+// yup is used for validate condition
 import * as yup from "yup";
+
 // import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+
 const formValidationSchema = yup.object({
   name:yup
   .string()
@@ -53,7 +57,7 @@ const history=useHistory();
       <TextField
     id="name"
     name="name"
-    value={values.email}
+    value={values.name}
     onChange={handleChange}
     onBlur={handleBlur}
     type="name"

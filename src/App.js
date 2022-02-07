@@ -15,7 +15,6 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 
 import Brightness7Icon from '@mui/icons-material/Brightness7';
 import Brightness4Icon from '@mui/icons-material/Brightness4';
-import { BasicForm } from "./BasicForm";
 
 
 
@@ -66,10 +65,6 @@ elevation={4}>
 
         <Route path="/movies/addMovie">
         <AddMovie   />
-        </Route>
-
-        <Route path="/movies/basicForm">
-        <BasicForm   />
         </Route>
 
         <Route path="/movies/:id">
