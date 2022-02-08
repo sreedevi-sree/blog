@@ -21,6 +21,7 @@ export function UserList() {
   // This is a caller function of the getUsers 
   useEffect(getUsers,[])
 
+  // Delete the user data from api
   const deleteUser=(id)=>{
     fetch("https://618fa736f6bf4500174849a7.mockapi.io/user/" + id,{
       method:"DELETE"
@@ -36,14 +37,17 @@ export function UserList() {
     <div>
       <section className="user-list">
         {user.map((user, index) => (
+
           // To disply name and movie in welcome app to fetch data from initial setup
           <Welcome
             key={index}
             name={user.name}
             pic={user.pic}
+
+            // use to terminate what should be change in api
             id={user.id}
-            //
-// Delete the user data from api
+            
+// click on Delete button the deleteUser function is called 
             deleteButton={
             <IconButton
               style={{ marginLeft: "auto" }}
@@ -53,6 +57,7 @@ export function UserList() {
               <DeleteIcon />
             </IconButton>
             }
+            
             // Edit the user data from api
             editButton={
             <IconButton

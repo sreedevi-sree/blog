@@ -5,11 +5,6 @@ import "./index.css";
 // matching the url and display the rigth conent
 import { Switch, Route,useHistory  } from "react-router-dom";
 
-// we want import useState for to inform something change in code
-// import { useState  } from "react";
-
-// useparams is used to get the value from url
-
 // to use material ui product appbar toolbar TextField Icon and Delete Button 
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -19,11 +14,9 @@ import { EditUser } from "./EditUser";
 import { Home } from "./Home";
 import { UserList } from "./UserList";
 
-export default function App() {
-  
+export default function App() {  
   const history=useHistory();
-
-  return (
+return (
     <div className="App">
       <AppBar position="static">
         <Toolbar>
@@ -36,7 +29,7 @@ export default function App() {
         </Toolbar>
       </AppBar>
 
-{/* route path and history are mathes then only its working */}
+{/* switch is used to match the url and route path is redirect it */}
       <Switch>
 
       <Route path="/user/addUsers">
@@ -56,7 +49,9 @@ export default function App() {
       <Route exact path="/">
           <Home />  
         </Route> 
+
       </Switch>    
+      
    </div>
   );
 }

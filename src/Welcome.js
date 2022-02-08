@@ -10,8 +10,10 @@ export function Welcome({ name, pic, deleteButton, editButton }) {
 
       <img src={pic} alt="profilePicture" />
       <h1>{name}</h1>
+
       {/* to add like and dislike button  */}
       <Counter />
+      
       {/* To add follow button  */}
       <Follow />
 
