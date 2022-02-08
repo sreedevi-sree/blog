@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { useState } from "react";
 import TextField from '@mui/material/TextField';
 
-export function AddUser({ userList, setUserList }) {
+export function AddUser() {
   const [name, setName] = useState(" ");
   const [pic, setPic] = useState(" ");
   const history = useHistory();
@@ -25,10 +25,14 @@ export function AddUser({ userList, setUserList }) {
             name: name,
             pic: pic
           };
-          // add the name and pic to the inital setup
-          setUserList([...userList, newUser]);
-          history.push("/users");
-        }}
+          fetch("https://618fa736f6bf4500174849a7.mockapi.io/user/",{
+            method:"POST",
+            body:JSON.stringify(newUser),
+            headers:{
+              "Content-type":"application/json"
+            }
+              }).then(()=>history.push("/user"))
+                }}
       >
         Add User
       </button>
