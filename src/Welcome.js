@@ -1,22 +1,66 @@
-import React from "react";
-import { Follow } from "./Follow";
+import { useState } from "react";
+import IconButton from '@mui/material/IconButton';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import InfoIcon from '@mui/icons-material/Info';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
 import { Counter } from "./Counter";
+import Rating from '@mui/material/Rating';
+import Typography from '@mui/material/Typography';
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-// to display name and pic 
-export function Welcome({ name, pic, deleteButton, editButton }) {
+
+export function Welcome({ name, poster, rating, year, summary,id ,deleteButton,editButton }) {
+  const history=useHistory();
+  const styles = { color: rating >= "8.5" ? "green" : "red" };
+  const [showText, setShowText] = useState(false);
+  const [value, setValue] = useState(2);
   return (
-    <div className="user-details">
+    <Card className="new-movie">
+      <img className="movie-poster" src={poster} alt={name} />{" "}
+      <CardContent>
+        <h1 className="movie-name">{name}
+          <IconButton
+            onClick={() => setShowText(!showText)}
+            color="primary"
+            aria-label="Toggle summary">
 
-      <img src={pic} alt="profilePicture" />
-      <h1>{name}</h1>
-      {/* to add like and dislike button  */}
-      <Counter />
-      {/* To add follow button  */}
-      <Follow />
+            {showText ? <ExpandLessIcon /> : <ExpandMoreIcon />}
+          </IconButton>
+          <IconButton
+            onClick={() => history.push("/movies/" + id)}
+            color="primary"
+            aria-label="Movie details">
 
+           <InfoIcon />
+          </IconButton>
+        </h1>
+        {showText ? <p className="movie-summary">{summary}</p> : ""}
+        <p style={styles} className="movie-rating"> <Typography component="legend">Rating:</Typography>
+<Rating
+  name="simple-controlled"
+  value={value}
+  onChange={(event, newValue) => {
+    setValue(newValue);
+  }}
+/>{rating}/10</p>
+        <p className="movie-year">Year: {year}</p>
+
+        {/* conditional styling */}
+        {/* <p style={summarystyles} className="movie-summary">{summary}</p>   */}
+
+        {/* conditional rendering */}
+       
+      </CardContent>
+      
+<div className="counter">
+<Counter /> 
       {deleteButton}
-      {editButton}
-
-    </div>
+      {editButton} 
+</div>
+     
+      
+    </Card>
   );
 }
