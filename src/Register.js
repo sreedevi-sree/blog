@@ -1,15 +1,18 @@
 import React from "react";
+
 // Click on button to change url
 import { useHistory } from "react-router-dom";
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+
 // textfield with icons
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import InputAdornment from '@mui/material/InputAdornment';
 import MailIcon from '@mui/icons-material/Mail';
 import PhoneIcon from '@mui/icons-material/Phone';
 import IconButton from '@mui/material/IconButton';
+
 // for show and hide password
 import FilledInput from '@mui/material/FilledInput';
 import Visibility from '@mui/icons-material/Visibility';
@@ -53,7 +56,7 @@ export const formValidationSchema=yup.object({
   })
 export function Register() {
   const { handleSubmit, values, handleChange, handleBlur, errors, touched } = useFormik({
-    initialValues: { name: "", mobilenumber: "" },
+    initialValues: { username:"", password:"",name: "", mobilenumber: "",email:"" },
     validationSchema: formValidationSchema,
     onSubmit: (values) => {
       console.log("onSubmit", values);
@@ -82,9 +85,12 @@ export function Register() {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-  
+
+  // if(errors.name || errors.mobilenumber || errors.username || errors.email || errors.password)
+
   return (
     <div className="register">
+
       <form onSubmit={handleSubmit}>
 
         Name:
@@ -191,9 +197,10 @@ export function Register() {
         <Button
           variant="contained"
           type="submit"
-          onClick={() => history.push("/shopMe/login")}
+          
+          onClick={() => history.push("/blog/signin")}
         >
-          Register
+          Signup
         </Button>
       </form>
     </div>

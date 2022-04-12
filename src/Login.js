@@ -23,6 +23,8 @@ export const formValidationSchema=yup.object({
   })
 
 export function Login() {
+
+  
   const { handleSubmit, values, handleChange, handleBlur, errors, touched } = useFormik({
     initialValues: { username: "", password: "" },
     validationSchema: formValidationSchema,
@@ -41,6 +43,7 @@ export function Login() {
           name="username"
           value={values.username}
           onChange={handleChange}
+          // TO check user leaves the form field
           onBlur={handleBlur}
           type="username"
           placeholder="username" />
@@ -61,9 +64,9 @@ export function Login() {
         <Button
           variant="contained"
           type="submit"
-          onClick={() => history.push("/shopMe/products")}
+          onClick={() => history.push("/blog/home")}
         >
-          Login
+          Signin
         </Button>
 
       </form>
