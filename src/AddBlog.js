@@ -51,7 +51,6 @@ export function AddBlog() {
   const history = useHistory();
 
   return (
-  
       <div className="new-Blog-list">
       <form onSubmit={handleSubmit}>
         <TextField

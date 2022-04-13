@@ -67,7 +67,7 @@ export function Register() {
 
 // For show and hide password
   const [show, setShow] = React.useState({
-      password: '',
+    password:" ",
     showPassword: false,
   });
 
@@ -103,6 +103,7 @@ export function Register() {
           type="name"
           variant="filled"
           placeholder="Name"
+          label="Name"
           InputProps={{
             endAdornment: (
               <InputAdornment position="start">
@@ -126,6 +127,7 @@ export function Register() {
           onBlur={handleBlur}
           type="mobilenumber"
           placeholder="Mobilenumber"
+          label="mobilenumber"
           variant="filled" />
         {errors.mobilenumber && touched.mobilenumber ? errors.mobilenumber : ""}
         <br />
@@ -145,6 +147,7 @@ export function Register() {
           onBlur={handleBlur}
           type="email"
           placeholder="Email" 
+          label="Email"
           variant="filled"/>
         {errors.email && touched.email ? errors.email : ""}
         <br />
@@ -163,6 +166,7 @@ export function Register() {
           onBlur={handleBlur}
           type="username"
           placeholder="Username" 
+          label="username"
           variant="filled"/>
         {errors.username && touched.username ? errors.username : ""}
         <br />
@@ -175,7 +179,9 @@ export function Register() {
           onChange={handleChanged('password')}
           onBlur={handleBlur}
           type={show.showPassword ? 'text' : 'password'}
+         
           placeholder="password" 
+          label="password"
           variant="filled"
            endAdornment={
               <InputAdornment position="end">
@@ -189,20 +195,31 @@ export function Register() {
                 </IconButton>
               </InputAdornment>
             }
-            label="Password"
+          
           />
      {errors.password && touched.password ? errors.password : ""}
         <br />
-
         <Button
-          variant="contained"
-          type="submit"
-          
-          onClick={() => history.push("/blog/signin")}
-        >
-          Signup
-        </Button>
+onClick={() => {
+  const newUser = {
+    name: values.name,
+    mobilnumber: values.mobilenumber,
+    email: values.email,
+    password: values.password
+  };
+  fetch("https://618fa736f6bf4500174849a7.mockapi.io/register/",{
+    method:"POST",
+    body:JSON.stringify(newUser),
+    headers:{
+      "Content-type":"application/json"
+    }
+      }).then(()=>history.push("/blog/signin"))
+        }}
+variant="outlined">signup</Button>
       </form>
     </div>
   );
 }
+
+
+
