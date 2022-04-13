@@ -175,7 +175,7 @@ export function Register() {
           <FilledInput
           id="password"
           name="password"
-          value={values.password}
+          // value={values.password}
           onChange={handleChanged('password')}
           onBlur={handleBlur}
           type={show.showPassword ? 'text' : 'password'}
@@ -201,6 +201,8 @@ export function Register() {
         <br />
         <Button
 onClick={() => {
+   values.password = show.password;
+
   const newUser = {
     name: values.name,
     mobilnumber: values.mobilenumber,
