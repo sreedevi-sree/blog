@@ -1,5 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
+import { useState,useEffect } from "react";
 import Button from '@mui/material/Button';
 
 // formik for form validation
@@ -24,6 +25,19 @@ export const formValidationSchema=yup.object({
 
 export function Login() {
 
+    // For initial setup
+    const [users, setUSers] = useState([]);
+
+    // Get signup data from server 
+    const getUsers=()=>{
+      fetch("https://618fa736f6bf4500174849a7.mockapi.io/register",{
+        method:"GET"
+      }).then((data)=>data.json())
+      .then((usr)=>setUSers(usr))
+    };
+  
+    // This is a caller function of the get user data 
+  useEffect(getUsers,[])
   
   const { handleSubmit, values, handleChange, handleBlur, errors, touched } = useFormik({
     initialValues: { username: "", password: "" },

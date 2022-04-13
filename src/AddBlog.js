@@ -51,9 +51,9 @@ export function AddBlog() {
   const history = useHistory();
 
   return (
-    <div>
+  
       <div className="new-Blog-list">
-
+      <form onSubmit={handleSubmit}>
         <TextField
             // based on id and name only formik know what is change.
           id="title"
@@ -111,7 +111,7 @@ export function AddBlog() {
           variant="outlined"  />
  {errors.text && touched.text ? errors.text : ""}
  
-      </div>
+     
       <Button
         onClick={() => {
           const newBlog = {
@@ -120,8 +120,6 @@ export function AddBlog() {
             picture: values.picture,
             text: values.text
           };
- if(errors.title || errors.description || errors.picture || errors.text)
-return
           fetch("https://618fa736f6bf4500174849a7.mockapi.io/blog/",{
             method:"POST",
             body:JSON.stringify(newBlog),
@@ -131,7 +129,8 @@ return
               }).then(()=>history.push("/blog/home"))
                 }}
         variant="outlined">Add Blog</Button>
-
+ </form>
     </div>
+   
   );
 }

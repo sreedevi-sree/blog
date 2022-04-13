@@ -15,7 +15,8 @@ export function Home() {
     <div>
           <AppBar position="static">
             <Toolbar>          
-                <Button style={{marginLeft:"auto"}} color="inherit" onClick={()=>history.push("/blog/home/addblog")}>Create Blog</Button>
+                <Button style={{marginLeft:"auto"}} color="inherit" 
+                onClick={()=>history.push("/blog/home/addblog")}>Create Blog</Button>
             </Toolbar>
           </AppBar>
 
@@ -31,3 +32,5 @@ export function Home() {
     </div>
   );
 }
+
+
