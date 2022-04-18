@@ -3,8 +3,6 @@ import React from "react";
 // Click on button to change url
 import { useHistory } from "react-router-dom";
 
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 
 // textfield with icons
 import AccountCircle from '@mui/icons-material/AccountCircle';
@@ -14,7 +12,6 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import IconButton from '@mui/material/IconButton';
 
 // for show and hide password
-import FilledInput from '@mui/material/FilledInput';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
@@ -23,6 +20,7 @@ import { useFormik } from "formik";
 
 // yup is used for validate condition
 import * as yup from "yup";
+
 
 // formValidationSchema is a library in formik 
 export const formValidationSchema=yup.object({
@@ -89,139 +87,148 @@ export function Register() {
   // if(errors.name || errors.mobilenumber || errors.username || errors.email || errors.password)
 
   return (
-    <div className="register">
-
-      <form onSubmit={handleSubmit}>
-
-        Name:
-        <TextField    
-          id="name"
-          name="name"
-          value={values.name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          type="name"
-          variant="filled"
-          placeholder="Name"
-          label="Name"
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="start">
-                <AccountCircle />
-              </InputAdornment>     
-            ),}}/>
-        {errors.name && touched.name ? errors.name : ""}
-        <br />
-
-        Mobilenumber:
-        <TextField
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="start">
-              <PhoneIcon />
-            </InputAdornment>),}}
-          id="mobilenumber"
-          name="mobilenumber"
-          value={values.mobilenumber}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          type="mobilenumber"
-          placeholder="Mobilenumber"
-          label="mobilenumber"
-          variant="filled" />
-        {errors.mobilenumber && touched.mobilenumber ? errors.mobilenumber : ""}
-        <br />
-
-        Email:
-        <TextField
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="start">
-              <MailIcon />
-            </InputAdornment>
-          ),}}
-          id="email"
-          name="email"
-          value={values.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          type="email"
-          placeholder="Email" 
-          label="Email"
-          variant="filled"/>
-        {errors.email && touched.email ? errors.email : ""}
-        <br />
-
-        User Name:
-        <TextField
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="start">
-              <AccountCircle />
-            </InputAdornment>),}}
-          id="username"
-          name="username"
-          value={values.username}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          type="username"
-          placeholder="Username" 
-          label="username"
-          variant="filled"/>
-        {errors.username && touched.username ? errors.username : ""}
-        <br />
-
-       Password:
-          <FilledInput
-          id="password"
-          name="password"
-          // value={values.password}
-          onChange={handleChanged('password')}
-          onBlur={handleBlur}
-          type={show.showPassword ? 'text' : 'password'}
-         
-          placeholder="password" 
-          label="password"
-          variant="filled"
-           endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end"
-                >
-                  {values.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-          
-          />
-     {errors.password && touched.password ? errors.password : ""}
-        <br />
-        <Button
-onClick={() => {
-   values.password = show.password;
-
-  const newUser = {
-    name: values.name,
-    mobilnumber: values.mobilenumber,
-    email: values.email,
-    password: values.password
-  };
-  fetch("https://618fa736f6bf4500174849a7.mockapi.io/register/",{
-    method:"POST",
-    body:JSON.stringify(newUser),
-    headers:{
-      "Content-type":"application/json"
-    }
-      }).then(()=>history.push("/blog/signin"))
-        }}
-variant="outlined">signup</Button>
-      </form>
+    <div id="main-registration-container">
+    <div id="register">
+       <h3 style={{textAlign:"center"}}>Registration page</h3>
+       <form onSubmit={handleSubmit} >
+       <label>Name</label>
+       <input id="name"
+              name="name"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              type="name"
+              variant="filled"
+              placeholder="Name"
+              label="Name"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="start">
+                    <AccountCircle />
+                  </InputAdornment>     
+                ),}} />
+               <div className="errorMsg">
+               {errors.name && touched.name ? errors.name : ""}
+               </div>
+            <br />
+       
+    
+       
+       <label>Email ID:</label>
+       <input InputProps={{
+              endAdornment: (
+                <InputAdornment position="start">
+                  <MailIcon />
+                </InputAdornment>
+              ),}}
+              id="email"
+              name="email"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              type="email"
+              placeholder="Email" 
+              label="Email"
+              variant="filled" />
+       <div className="errorMsg"> 
+       {errors.email && touched.email ? errors.email : ""}
+       </div>
+            <br />
+    
+    
+    
+       <label>Mobile No:</label>
+       <input InputProps={{
+              endAdornment: (
+                <InputAdornment position="start">
+                  <PhoneIcon />
+                </InputAdornment>),}}
+              id="mobilenumber"
+              name="mobilenumber"
+              value={values.mobilenumber}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              type="mobilenumber"
+              placeholder="Mobilenumber"
+              label="mobilenumber"
+              variant="filled"   />
+           <div className="errorMsg">
+           {errors.mobilenumber && touched.mobilenumber ? errors.mobilenumber : ""}
+           </div>
+            <br />   
+    
+            <label>User Name</label>
+            <input InputProps={{
+              endAdornment: (
+                <InputAdornment position="start">
+                  <AccountCircle />
+                </InputAdornment>),}}
+              id="username"
+              name="username"
+              value={values.username}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              type="username"
+              placeholder="Username" 
+              label="username"
+              variant="filled" />
+     <div className="errorMsg">
+     {errors.username && touched.username ? errors.username : ""}
+     </div>
+            <br />
+    
+    
+       <label>Password</label>
+       <input id="password"
+              name="password"
+              // value={values.password}
+              onChange={handleChanged('password')}
+              onBlur={handleBlur}
+              type={show.showPassword ? 'text' : 'password'}
+             
+              placeholder="password" 
+              label="password"
+              variant="filled"
+               endAdornment={
+                  <InputAdornment position="end">
+                    <IconButton
+                      aria-label="toggle password visibility"
+                      onClick={handleClickShowPassword}
+                      onMouseDown={handleMouseDownPassword}
+                      edge="end"
+                    >
+                      {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
+                  </InputAdornment>
+                }/>
+       <div className="errorMsg">
+       {errors.password && touched.password ? errors.password : ""}
+       </div>
+            <br />
+    
+    
+       <input type="submit" className="button"  
+       
+       onClick={() => {
+        values.password = show.password;
+     
+       const newUser = {
+         name: values.name,
+         mobilnumber: values.mobilenumber,
+         email: values.email,
+         password: values.password
+       };
+       fetch("https://618fa736f6bf4500174849a7.mockapi.io/register/",{
+         method:"POST",
+         body:JSON.stringify(newUser),
+         headers:{
+           "Content-type":"application/json"
+         }
+           }).then(()=>history.push("/blog/signin"))
+             }}
+     variant="outlined"/>
+       </form>
+    </div>
     </div>
   );
 }
-
-
-

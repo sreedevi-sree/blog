@@ -16,10 +16,14 @@ export function Bloglist() {
       method:"GET"
     }).then((data)=>data.json())
     .then((blg)=>setBlog(blg))
+   console.log(blog); 
   };
 
+  
+
+
   // This is a caller function of the getblogs 
-useEffect(getBlogs,[])
+useEffect(getBlogs,[blog])
 
 // To delete the blog from bloglist
 const deleteBlog=(id)=>{
@@ -29,12 +33,41 @@ const deleteBlog=(id)=>{
   .then(()=>getBlogs())
 };
 
+// Initially there will be all data - so all blogs are showed
+const [filteredBlogs, setFilteredBlogs] = useState([blog]);
+
+// create another state to store search value
+const [searchInput, setSearchInput] = useState("");
+
+// function to filter blogs based on title value
+const filterBlogs = () => {
+  // store filtered result in a variable
+  let blogsCopy = blog.filter((blog) => blog.title === parseInt(searchInput));
+  // change the filteredMarks state with the new data
+  setFilteredBlogs(blogsCopy);
+};
+
   // To change url
   const history=useHistory();
   return (
     <div>
+
+<div className="blogTitle">
+       
+        <input
+          type="text"
+          class="form-control"
+          id="usr"
+          placeholder="Blog Title"
+          value={searchInput}
+          onChange={(e) => setSearchInput(e.target.value)}
+        />
+        {/* on click of button called filter function */}
+        <button onClick={filterBlogs}>Search Blogs</button>
+      </div>
+
       <section className="bloglist">
-        {blog.map((blog,index) => (
+        {filteredBlogs.map((blog,index) => (
 
 // To disply blog in blog app to fetch data from initial setup
           <Blog

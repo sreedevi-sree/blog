@@ -15,8 +15,7 @@ export function Home() {
     <div>
           <AppBar position="static">
             <Toolbar>          
-                <Button style={{marginLeft:"auto"}} color="inherit" 
-                onClick={()=>history.push("/blog/home/addblog")}>Create Blog</Button>
+                <Button  color="inherit" onClick={()=>history.push("/blog/home/addblog")}>Create Blog</Button>
             </Toolbar>
           </AppBar>
 
@@ -24,11 +23,11 @@ export function Home() {
 
       <Route  path="/blog/home/addblog">           
       <AddBlog />
-        </Route>     
-
-      </Switch>      
+        </Route>   
+              </Switch>      
      
       <Bloglist />
+      
     </div>
   );
 }

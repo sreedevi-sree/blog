@@ -1,14 +1,12 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import { useState,useEffect } from "react";
-import Button from '@mui/material/Button';
 
 // formik for form validation
 import { useFormik } from "formik";
 
 // yup is used for validate condition
 import * as yup from "yup";
-
 
 export const formValidationSchema=yup.object({
     username:yup
@@ -48,43 +46,36 @@ export function Login() {
   });
   const history = useHistory();
   return (
-    <div className="login">
-      <h1>Login to the Website</h1>
-      <form onSubmit={handleSubmit}>
-        User Name:
-        <input
-          id="username"
-          name="username"
-          value={values.username}
-          onChange={handleChange}
-          // TO check user leaves the form field
-          onBlur={handleBlur}
-          type="username"
-          placeholder="username" />
-        {errors.username && touched.username ? errors.username : ""}
-        <br />
-        password:
-        <input
-          id="password"
-          name="password"
-          value={values.password}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          type="password"
-          placeholder="password" />
+    <div class="wrapper">
+    <form action="" method="post" name="Login_Form" class="form-signin">
+        <h3 class="form-signin-heading">Welcome Back! Please Sign In</h3>
+        <hr style={{height:"20px"}} className="colorgraph"/> <br/>
 
-        {errors.password && touched.password ? errors.password : ""}
-        <br />
-        <Button
-          variant="contained"
-          type="submit"
-          onClick={() => history.push("/blog/home")}
-        >
-          Signin
-        </Button>
+    <input type="text" class="form-control" placeholder="Username" required="" autofocus=""
 
-      </form>
-    </div>
+        id="username"
+        name="username"
+        value={values.username}
+        onChange={handleChange}
+        // TO check user leaves the form field
+        onBlur={handleBlur} />
+    {errors.username && touched.username ? errors.username : ""}
+    <br />
+
+    <input type="password" class="form-control" placeholder="Password" required=""
+
+        id="password"
+        name="password"
+        value={values.password}
+        onChange={handleChange}
+        onBlur={handleBlur} />
+
+    <button class="btn btn-lg btn-primary btn-block" value="Login" type="Submit"
+        variant="contained"
+        onClick={() => history.push("/blog/home")}>Signin</button>
+</form>
+</div >
+
 
   );
 }

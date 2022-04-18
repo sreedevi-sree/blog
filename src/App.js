@@ -13,19 +13,17 @@ import { EditBlog } from "./EditBlog";
 
 
 export default function App() {
+  // use history is used to change the url on button click
   const history=useHistory();
 
   return (
        <div className="App">
       <AppBar position="static">
-        <Toolbar>
-          
+        <Toolbar>          
       <Button color="inherit" onClick={()=>history.push("/blog/home")}>Home</Button>
-      
       <Button color="inherit"   
       style={{marginLeft:"auto"}}
       onClick={()=>history.push("/blog/signup")}>Sign UP</Button>
-
       <Button color="inherit" onClick={()=>history.push("/blog/signin")}>Sign In</Button>
       <Button color="inherit" onClick={()=>history.push("/")}>Logout</Button>
       </Toolbar>
@@ -43,20 +41,13 @@ export default function App() {
 
       <Route path="/blog/signin">           
         <Login/>    
-        </Route>
-
-
-        
-        
+        </Route>        
 
         <Route path="/blog/home">           
         <Home/>    
         </Route>
 
-        
-
-
-        </Switch>      
+    </Switch>      
       </div>
      );
      }

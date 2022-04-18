@@ -53,7 +53,9 @@ export function AddBlog() {
   return (
       <div className="new-Blog-list">
       <form onSubmit={handleSubmit}>
-        <TextField
+     
+     <div className="addBlogDivision">
+     <TextField
             // based on id and name only formik know what is change.
           id="title"
           name="title"
@@ -65,7 +67,7 @@ export function AddBlog() {
           type="title"
           placeholder="Title"
           label="Title" 
-          variant="outlined"  />
+          variant="outlined"  /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 {errors.title && touched.title ? errors.title : ""}
 
         <TextField
@@ -78,8 +80,8 @@ export function AddBlog() {
          onBlur={handleBlur}
          type="description"
          placeholder="Description"
-         label="description" 
-         variant="outlined"  />
+         label="Description" 
+         variant="outlined"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 {errors.description && touched.description ? errors.description : ""}
 
         <TextField
@@ -92,8 +94,8 @@ export function AddBlog() {
           onBlur={handleBlur}
           type="picture"
           placeholder="Picture"
-          label="picture" 
-          variant="outlined"  />
+          label="Picture" 
+          variant="outlined"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  {errors.picture && touched.picture ? errors.picture : ""}
  
         <TextField
@@ -106,12 +108,14 @@ export function AddBlog() {
           onBlur={handleBlur}
           type="text"
           placeholder="Text"
-          label="text" 
-          variant="outlined"  />
+          label="Text" 
+          variant="outlined"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
  {errors.text && touched.text ? errors.text : ""}
+     </div>
  
      
-      <Button
+      <div className="blogButton">
+      <Button  style={{backgroundColor:"#63dee0"}}
         onClick={() => {
           const newBlog = {
             title: values.title,
@@ -128,6 +132,7 @@ export function AddBlog() {
               }).then(()=>history.push("/blog/home"))
                 }}
         variant="outlined">Add Blog</Button>
+      </div>
  </form>
     </div>
    
