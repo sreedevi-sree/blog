@@ -28,7 +28,7 @@ export function Login() {
 
     // Get signup data from server 
     const getUsers=()=>{
-      fetch("https://618fa736f6bf4500174849a7.mockapi.io/register",{
+      fetch("https://618fa736f6bf4500174849a7.mockapi.io/register/",{
         method:"GET"
       }).then((data)=>data.json())
       .then((usr)=>setUSers(usr))
@@ -68,7 +68,8 @@ export function Login() {
         name="password"
         value={values.password}
         onChange={handleChange}
-        onBlur={handleBlur} />
+        onBlur={handleBlur} 
+        />
 
     <button class="btn btn-lg btn-primary btn-block" value="Login" type="Submit"
         variant="contained"

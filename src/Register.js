@@ -207,7 +207,7 @@ export function Register() {
             <br />
     
     
-       <input type="submit" className="button"  
+       <button type="submit" className="button"  
        
        onClick={() => {
         values.password = show.password;
@@ -226,7 +226,8 @@ export function Register() {
          }
            }).then(()=>history.push("/blog/signin"))
              }}
-     variant="outlined"/>
+     variant="outlined">LOGIN
+     </button>
        </form>
     </div>
     </div>

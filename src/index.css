@@ -17,7 +17,7 @@
 }
 .new-blog{
   margin-top: 10px;
-  border: 2px solid rgb(216, 238, 247);
+  border: 2px solid rgb(13, 13, 14);
   background-color: rgb(216, 238, 247);
   border-radius: 20px;
   
@@ -153,6 +153,150 @@ form input {
 }
 
 
+
+/* .NavItem{
+    margin-left: 10vw;
+} */
+
+#buttonWork{
+  margin-left: 20vw; 
+}
+
+#serchBar{
+  margin-left: 5vw; 
+} 
+
+
+
+/* Banner front page */
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300,100,700,900);
+
+h1,
+p,
+a{
+margin: 0;
+padding: 0;
+font-family: 'sans-serif';
+}
+
+h1 {
+font-size: 2.8em;
+padding: 10px 0;
+font-weight: 800;
+}
+
+p {
+font-size: 1.1em;
+font-weight: 100;
+letter-spacing: 5px;
+}
+
+.header {
+  margin-top: 5vh;
+width: 100%;
+height: 50vh;
+padding:60px 0;
+text-align: center;
+background: #33cccc;
+color: white;
+}
+
+
+.btn-bgstroke {
+font-size: 20px;
+display: inline-block;
+border: 1px solid white;
+padding: 10px 20px;
+border-radius: 10px;
+cursor: pointer;
+font-weight: 300;
+margin-top: 30px; 
+}
+
+.btn-bgstroke:hover {
+background-color: white;
+color: #33cccc;
+}
+
+@media only screen and (max-width: 600px) {
+  #serchBar{
+      margin-left: 0vw; 
+  }
+
+  
+#buttonWork{
+  margin-left: 0vw; 
+}
+}
+
+
+
+
+
+
+
+/* Fottyer */
+.footer {
+  padding: 40px 0;
+  margin-top: 5vh;
+  background-color: #d3d2d2;
+}
+
+.footer .social {
+  text-align: center;
+  padding-bottom: 25px;
+  color: #4b4c4d;
+}
+
+.footer .social a {
+  font-size: 24px;
+  color: inherit;
+  border: 1px solid #ccc;
+  width: 40px;
+  height: 40px;
+  line-height: 38px;
+  display: inline-block;
+  text-align: center;
+  border-radius: 50%;
+  margin: 0 8px;
+  opacity: 0.75;
+}
+
+.footer .social a:hover {
+  opacity: 0.9;
+}
+
+.footer ul {
+  margin-top: 0;
+  padding: 0;
+  list-style: none;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+.footer ul a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.8;
+}
+
+.footer ul li {
+  display: inline-block;
+  padding: 0 15px;
+}
+
+.footer ul a:hover {
+  opacity: 1;
+}
+
+.footer .copyright {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 13px;
+  color: #aaa;
+}
 
 @media only screen and (max-width: 600px) {
   #register, #login {
