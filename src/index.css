@@ -299,7 +299,7 @@ color: #33cccc;
 }
 
 @media only screen and (max-width: 600px) {
-  #register, #login {
+  #register, #login,.navbar {
       width: 97vw;
       border: 3px solid #d6d7da;
       padding: 0px 15px 15px 15px;

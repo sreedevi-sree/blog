@@ -19,31 +19,20 @@ export default function App() {
   return (
 
     <div className="App">
-      <nav class="navbar navbar-expand-lg navbar-light bg-success">
+     
+            <AppBar color="success" position="static">
+            <Toolbar>          
+                <Button  color="inherit" onClick={() => history.push("/blog/home")}>Home</Button>
+                <Button  color="inherit" onClick={() => history.push("/blog/signup")}>SIGN UP</Button>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#demo-navbar"
-          aria-controls="demo-navbar" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+                <Button  color="inherit" onClick={() => history.push("/blog/signin")}>SIGN IN</Button>
+                <Button  color="inherit" onClick={() => history.push("/")}>LOGOUT</Button>
 
-        <div class="collapse navbar-collapse" id="demo-navbar">
-
-            <a class="nav-link text-light" onClick={() => history.push("/blog/home")}>Home <span class="sr-only">(current)</span></a>
-
-            <a class="nav-link text-light" onClick={() => history.push("/blog/signup")}>SIGN UP</a>
-
-            <a class="nav-link text-light" onClick={() => history.push("/blog/signin")}>SIGN IN</a>
+            </Toolbar>
+          </AppBar>
 
 
-            <a class="nav-link text-light" onClick={() => history.push("/")}>LOGOUT</a>
-    
-
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"  id="serchBar"/>
-          </form>
-          <button class="btn btn-outline-warning my-2 my-sm-0" type="submit" id="buttonWork">Search</button>
-        </div>
-      </nav>
+       
 
       <section class="header">
     <h1>Let's BLOG</h1>
@@ -64,10 +53,6 @@ export default function App() {
         <Route path="/blog/signin">
           <Login />
         </Route>
-
-
-
-
 
         <Route path="/blog/home">
           <Home />
