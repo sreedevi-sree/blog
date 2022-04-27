@@ -1,44 +1,77 @@
-import React from "react";
+import './index.css';
 
+import React, { useEffect, useState } from 'react';
+import { Route, Switch, useHistory } from 'react-router-dom';
 
-import "./index.css";
 import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import Button from '@mui/material/Button';
-import { Switch, Route, useHistory } from "react-router-dom";
-import { Home } from "./Home";
-import { Register } from "./Register";
-import { Login } from "./Login";
-import { EditBlog } from "./EditBlog";
-
-
+import { EditBlog } from './EditBlog';
+import { Home } from './Home';
+import { Login } from './Login';
+import { Register } from './Register';
+import Toolbar from '@mui/material/Toolbar';
 
 export default function App() {
   const history = useHistory();
+  const [isUserLogged, setIsUserLogged] = useState(false);
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('users'));
+    if (user && user.user) {
+      setIsUserLogged(true);
+    }
+  }, []);
+
+  const loginHandler = () => {
+    setIsUserLogged(true);
+  };
+
+  const logoutHandler = (event) => {
+    // Delete user saved in localStorage
+    localStorage.removeItem('users');
+    setIsUserLogged(false);
+    history.push('/');
+  };
 
   return (
-
     <div className="App">
-     
-            <AppBar color="success" position="static">
-            <Toolbar>          
-                <Button  color="inherit" onClick={() => history.push("/blog/home")}>Home</Button>
-                <Button  color="inherit" onClick={() => history.push("/blog/signup")}>SIGN UP</Button>
+      <AppBar color="success" position="static">
+        <Toolbar>
+          {isUserLogged && (
+            <Button color="inherit" onClick={() => history.push('/blog/home')}>
+              Home
+            </Button>
+          )}
+          {!isUserLogged && (
+            <Button
+              color="inherit"
+              onClick={() => history.push('/blog/signup')}
+            >
+              SIGN UP
+            </Button>
+          )}
 
-                <Button  color="inherit" onClick={() => history.push("/blog/signin")}>SIGN IN</Button>
-                <Button  color="inherit" onClick={() => history.push("/")}>LOGOUT</Button>
-
-            </Toolbar>
-          </AppBar>
-
-
-       
+          {!isUserLogged && (
+            <Button
+              color="inherit"
+              onClick={() => history.push('/blog/signin')}
+            >
+              SIGN IN
+            </Button>
+          )}
+          {
+            <Button color="inherit" onClick={logoutHandler}>
+              LOGOUT
+            </Button>
+          }
+        </Toolbar>
+      </AppBar>
 
       <section class="header">
-    <h1>Let's BLOG</h1>
-    <p>Enjoy writing your blogs here..</p>
-    {/* <a class="btn-bgstroke">Call To Action</a> */}
-</section>
+        <h1>Let's BLOG</h1>
+        <p>Enjoy writing your blogs here..</p>
+        {/* <a class="btn-bgstroke">Call To Action</a> */}
+      </section>
 
       <Switch>
         <Route path="/blog/edit/:id">
@@ -47,11 +80,12 @@ export default function App() {
         </Route>
 
         <Route path="/blog/signup">
+          {' '}
           <Register />
         </Route>
 
         <Route path="/blog/signin">
-          <Login />
+          <Login loginHandler={loginHandler} />
         </Route>
 
         <Route path="/blog/home">
@@ -59,43 +93,43 @@ export default function App() {
         </Route>
       </Switch>
 
-
-
       <section class="footer">
-      <div class="social">
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-snapchat"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-facebook-f"></i></a>
-      </div>
+        <div class="social">
+          <a href="#">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#">
+            <i class="fab fa-snapchat"></i>
+          </a>
+          <a href="#">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </div>
 
-      <ul class="list">
-        <li>
-          <a href="#">Home</a>
-        </li>
-        <li>
-          <a href="#">Services</a>
-        </li>
-        <li>
-          <a href="#">About</a>
-        </li>
-        <li>
-          <a href="#">Terms</a>
-        </li>
-        <li>
-          <a href="#">Privacy Policy</a>
-        </li>
-      </ul>
-      <p class="copyright"><b>@RelevanceLab Pvt.Ltd</b></p>
-    </section>
+        <ul class="list">
+          <li>
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">Services</a>
+          </li>
+          <li>
+            <a href="#">About</a>
+          </li>
+          <li>
+            <a href="#">Terms</a>
+          </li>
+          <li>
+            <a href="#">Privacy Policy</a>
+          </li>
+        </ul>
+        <p class="copyright">
+          <b>@RelevanceLab Pvt.Ltd</b>
+        </p>
+      </section>
     </div>
-
-
-
   );
 }
-
-
-
-
-

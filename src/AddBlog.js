@@ -1,140 +1,155 @@
-// formik for form validation
-import {  useFormik } from "formik";
+import * as yup from 'yup';
+
+import React, { useState } from 'react';
 
 // yup is used for validate condition
-import * as yup from "yup";
-
-import React from "react";
-import { useHistory } from "react-router-dom";
+// formik for form validation
 // import { useState } from "react";
-
 import Button from '@mui/material/Button';
+import { StatusCodes } from 'http-status-codes';
 import TextField from '@mui/material/TextField';
-
+import axios from 'axios';
+import config from './config';
+import { useFormik } from 'formik';
+import { useHistory } from 'react-router-dom';
 
 const formValidationSchema = yup.object({
-  title:yup
-  .string()
-  .min(4)
-  .required(),
-  
-  description:yup
-  .string()
-  .min(4)
-  .required(),
-  
-  picture:yup
-  .string()
-  .min(4)
-  .required(),
-  
-  text:yup
-  .string()
-  .min(4)
-  .required(),
+  title: yup.string().min(4).required(),
 
+  description: yup.string().min(4).required(),
+
+  picture: yup.string().min(4).required(),
+
+  text: yup.string().min(4).required(),
 });
 
 export function AddBlog() {
- 
-  
   // Bulit in functions in Formik
-  const {handleSubmit,values,handleChange,handleBlur,errors,touched}=
+  const { handleSubmit, values, handleChange, handleBlur, errors, touched } =
     useFormik({
       // assign initial values for add data
-        initialValues:{title:"",description:"",picture:"",text:""},
-        validationSchema:formValidationSchema,
-        onSubmit:(values)=>{
-            console.log("onSubmit", values);
-        }
-    })
+      initialValues: { title: '', description: '', picture: '', text: '' },
+      validationSchema: formValidationSchema,
+      onSubmit: (values) => {
+        console.log('onSubmit', values);
+      },
+    });
   const history = useHistory();
 
+  const [blogPayload, setBlogPayload] = useState({});
+
+  const onChangeHandler = (event) => {
+    setBlogPayload((currentPayload) => ({
+      ...currentPayload,
+      [event.target.name]: event.target.value,
+    }));
+  };
+
+  const addBlogAction = async (event) => {
+    event.preventDefault();
+    try {
+      if (Object.keys(blogPayload).length === 0) {
+        throw new Error('Please fill all values');
+      }
+      const user = JSON.parse(localStorage.getItem('users'));
+      console.log(blogPayload);
+      const nPayload = {
+        userId: user.user.id,
+        content: blogPayload.description,
+        picture:blogPayload.picture,
+        title: blogPayload.title,
+      };
+
+      const responseReceived = await axios.post(
+        config.BACKEND_URL_POSTS.concat('createblog'),
+        nPayload,
+        {
+          headers: {
+            Authorization: `Bearer ${user.jwttoken.token}`,
+          },
+        }
+      );
+
+      if (responseReceived.status !== StatusCodes.OK) {
+        throw new Error('Network Error');
+      }
+
+      alert('Post Added Successfully');
+      window.location.reload();
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   return (
-      <div className="new-Blog-list">
+    <div className="new-Blog-list">
       <form onSubmit={handleSubmit}>
-     
-     <div className="addBlogDivision">
-     <TextField
+        <div className="addBlogDivision">
+          <TextField
             // based on id and name only formik know what is change.
-          id="title"
-          name="title"
-          value={values.title}
-          // handle the change value
-          onChange={handleChange}
-          // setting touch varible
-          onBlur={handleBlur}
-          type="title"
-          placeholder="Title"
-          label="Title" 
-          variant="outlined"  /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-{errors.title && touched.title ? errors.title : ""}
+            id="title"
+            name="title"
+            // handle the change value
+            onChange={onChangeHandler}
+            // setting touch varible
+            onBlur={handleBlur}
+            type="title"
+            placeholder="Title"
+            label="Title"
+            variant="outlined"
+          />{' '}
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <TextField
+            id="description"
+            name="description"
+            // handle the change value
+            onChange={onChangeHandler}
+            // setting touch varible
+            onBlur={handleBlur}
+            type="description"
+            placeholder="Description"
+            label="Description"
+            variant="outlined"
+          />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <TextField
+            id="picture"
+            name="picture"
+            // handle the change value
+            onChange={onChangeHandler}
+            // setting touch varible
+            onBlur={handleBlur}
+            type="image"
+            placeholder="Picture"
+            label="Picture"
+            variant="outlined"
+          />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <TextField
+            id="text"
+            name="text"
+            // handle the change value
+            onChange={onChangeHandler}
+            // setting touch varible
+            onBlur={handleBlur}
+            type="text"
+            placeholder="Text"
+            label="Text"
+            variant="outlined"
+          />
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
 
-        <TextField
-         id="description"
-         name="description"
-         value={values.description}
-         // handle the change value
-         onChange={handleChange}
-         // setting touch varible
-         onBlur={handleBlur}
-         type="description"
-         placeholder="Description"
-         label="Description" 
-         variant="outlined"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-{errors.description && touched.description ? errors.description : ""}
-
-        <TextField
-          id="picture"
-          name="picture"
-          value={values.picture} 
-          // handle the change value
-          onChange={handleChange}
-           // setting touch varible
-          onBlur={handleBlur}
-          type="picture"
-          placeholder="Picture"
-          label="Picture" 
-          variant="outlined"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- {errors.picture && touched.picture ? errors.picture : ""}
- 
-        <TextField
-          id="text"
-          name="text"
-          value={values.text} 
-          // handle the change value
-          onChange={handleChange}
-           // setting touch varible
-          onBlur={handleBlur}
-          type="text"
-          placeholder="Text"
-          label="Text" 
-          variant="outlined"  />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
- {errors.text && touched.text ? errors.text : ""}
-     </div>
- 
-     
-      <div className="blogButton">
-      <Button  style={{backgroundColor:"#63dee0"}}
-        onClick={() => {
-          const newBlog = {
-            title: values.title,
-            description: values.description,
-            picture: values.picture,
-            text: values.text
-          };
-          fetch("https://618fa736f6bf4500174849a7.mockapi.io/blog/",{
-            method:"POST",
-            body:JSON.stringify(newBlog),
-            headers:{
-              "Content-type":"application/json"
-            }
-              }).then(()=>history.push("/blog/home"))
-                }}
-        variant="outlined">Add Blog</Button>
-      </div>
- </form>
+        <div className="blogButton">
+          <Button
+            style={{ backgroundColor: '#63dee0' }}
+            onClick={addBlogAction}
+            variant="outlined"
+          >
+            Add Blog
+          </Button>
+        </div>
+      </form>
     </div>
-   
   );
 }
